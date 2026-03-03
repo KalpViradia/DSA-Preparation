@@ -1,21 +1,45 @@
-# DSA Preparation Questions
+# Data Structures and Algorithms (DSA)
 
-This repository contains Data Structures and Algorithms (DSA) preparation questions provided by the college for various academic years. The questions are organized by year in separate folders, with each question implemented in Java.
+This repository contains Java solutions for various Data Structures and Algorithms (DSA) problems.
 
-## Folder Structure
+---
 
-- `2022 - 2023/`  
-  Contains Java files for DSA questions assigned in the academic year 2022-2023.
-- `2025 - 2026/`  
-  Contains Java files for DSA questions assigned in the academic year 2025-2026.
+## 📂 Repository Structure
 
-## How to Use
+The repository is organized into the following folders:
 
-1. Browse the folders for your academic year.
-2. Each file (e.g., `question1.java`, `question2.java`, ...) contains the solution to a specific DSA question.
-3. Open the Java files in your preferred IDE or text editor to review or practice the solutions.
+- `2022 - 2023/` – Problems and solutions from that academic year  
+- `2025 - 2026/` – Problems and solutions from that academic year  
+- `Basic Programs/` – Fundamental Java programs  
+- `Basic Programs 2/` – Additional basic practice programs  
+- `ProgramAskedInCompany/` – Interview and company-asked questions  
 
-## Purpose
+---
 
-- Organized DSA questions provided by the college
-- To provide a structured set of problems for practice and revision.
+## 💻 Language Used
+
+- Java
+
+---
+
+## 🚀 How to Use
+
+1. Clone or download this repository.
+2. Open the project in your preferred IDE (VS Code, IntelliJ IDEA, Eclipse, etc.).
+3. Navigate to the desired folder.
+4. Compile and run the required `.java` file.
+
+---
+
+## 🎯 Purpose
+
+- Practice Data Structures and Algorithms  
+- Prepare for technical interviews  
+- Strengthen problem-solving skills  
+- Maintain structured coding practice  
+
+---
+
+## 📌 Note
+
+This repository is intended for learning and practice purposes.
