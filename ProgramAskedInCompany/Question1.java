@@ -2,6 +2,26 @@ import java.util.*;
 
 public class Question1 {
 
+    public static List<Integer> findDominantNumbers(int[] arr) {
+
+        Map<Integer, Integer> freq = new HashMap<>();
+
+        for (int num : arr) {
+            freq.put(num, freq.getOrDefault(num, 0) + 1);
+        }
+
+        int uniqueCount = freq.size();
+        List<Integer> result = new ArrayList<>();
+
+        for (Map.Entry<Integer, Integer> entry : freq.entrySet()) {
+            if (entry.getValue() > uniqueCount) {
+                result.add(entry.getKey());
+            }
+        }
+
+        return result;
+    }
+
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
@@ -14,26 +34,12 @@ public class Question1 {
         for (int i = 0; i < n; i++)
             arr[i] = sc.nextInt();
 
-        Map<Integer, Integer> freq = new HashMap<>();
-        Set<Integer> unique = new HashSet<>();
+        List<Integer> dominantNumbers = findDominantNumbers(arr);
 
-        for (int num : arr) {
-            freq.put(num, freq.getOrDefault(num, 0) + 1);
-            unique.add(num);
-        }
-
-        int uniqueCount = unique.size();
-        boolean found = false;
-
-        for (int key : freq.keySet()) {
-            if (freq.get(key) > uniqueCount) {
-                System.out.print(key + " ");
-                found = true;
-            }
-        }
-
-        if (!found)
+        if (dominantNumbers.isEmpty())
             System.out.println("No Dominant Number");
+        else
+            System.out.println(dominantNumbers);
 
         sc.close();
     }
