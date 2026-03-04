@@ -8,6 +8,7 @@ public class Question9 {
 
         System.out.print("Enter target amount: ");
         int amount = sc.nextInt();
+
         System.out.print("Enter number of coin types: ");
         int n = sc.nextInt();
 
@@ -18,19 +19,43 @@ public class Question9 {
             coins[i] = sc.nextInt();
 
         int[] dp = new int[amount + 1];
+        int[] usedCoin = new int[amount + 1];
+
         Arrays.fill(dp, amount + 1);
         dp[0] = 0;
 
         for (int coin : coins) {
             for (int i = coin; i <= amount; i++) {
-                dp[i] = Math.min(dp[i], dp[i - coin] + 1);
+                if (dp[i - coin] + 1 < dp[i]) {
+                    dp[i] = dp[i - coin] + 1;
+                    usedCoin[i] = coin;
+                }
             }
         }
 
-        if (dp[amount] > amount)
+        if (dp[amount] > amount) {
             System.out.println("Not Possible");
-        else
+        } else {
+
             System.out.println("Minimum coins needed: " + dp[amount]);
+
+            System.out.print("Breakdown: ");
+
+            int temp = amount;
+            List<Integer> breakdown = new ArrayList<>();
+
+            while (temp > 0) {
+                breakdown.add(usedCoin[temp]);
+                temp -= usedCoin[temp];
+            }
+
+            // Print breakdown
+            for (int i = 0; i < breakdown.size(); i++) {
+                System.out.print(breakdown.get(i));
+                if (i != breakdown.size() - 1)
+                    System.out.print(" + ");
+            }
+        }
 
         sc.close();
     }
