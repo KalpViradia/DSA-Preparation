@@ -28,24 +28,32 @@ public class Question5 {
 
         System.out.print("Enter secret word: ");
         String secret = sc.nextLine();
+
         System.out.print("Enter number of sentences: ");
         int n = sc.nextInt();
-        sc.nextLine();
+        sc.nextLine(); // consume newline
+
+        String[] sentences = new String[n];
 
         System.out.println("Enter " + n + " sentences:");
-        String[] sentences = new String[n];
         for (int i = 0; i < n; i++)
             sentences[i] = sc.nextLine();
 
-        Map<String, Integer> map = new HashMap<>();
+        Map<String, Integer> scoreMap = new HashMap<>();
 
+        // Calculate similarity scores
         for (String s : sentences)
-            map.put(s, calculateScore(s, secret));
+            scoreMap.put(s, calculateScore(s, secret));
 
-        Arrays.sort(sentences, (a, b) -> map.get(b) - map.get(a));
+        // Sort sentences in descending order of similarity
+        Arrays.sort(sentences, (a, b) ->
+                Integer.compare(scoreMap.get(b), scoreMap.get(a)));
 
-        for (String s : sentences)
-            System.out.print(s + " ");
+        // Join sorted sentences into final decoded string
+        String finalDecodedString = String.join(" ", sentences);
+
+        System.out.println("\nFinal Decoded String:");
+        System.out.println(finalDecodedString);
 
         sc.close();
     }
