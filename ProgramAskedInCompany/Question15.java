@@ -4,23 +4,29 @@ public class Question15 {
 
     static boolean isValid(int mask, int prevMask, char[] row) {
 
-        for (int i = 0; i < row.length; i++) {
+        int n = row.length;
+
+        for (int i = 0; i < n; i++) {
 
             if ((mask & (1 << i)) != 0) {
 
+                // Seat must not be broken
                 if (row[i] == '#') return false;
 
+                // No left student in same row
                 if (i > 0 && (mask & (1 << (i - 1))) != 0)
                     return false;
 
-                if ((prevMask & (1 << (i - 1))) != 0)
+                // No upper-left
+                if (i > 0 && (prevMask & (1 << (i - 1))) != 0)
                     return false;
 
-                if (i < row.length - 1 &&
-                    (prevMask & (1 << (i + 1))) != 0)
+                // No upper-right
+                if (i < n - 1 && (prevMask & (1 << (i + 1))) != 0)
                     return false;
             }
         }
+
         return true;
     }
 
@@ -30,13 +36,14 @@ public class Question15 {
 
         System.out.print("Enter rows: ");
         int m = sc.nextInt();
+
         System.out.print("Enter columns: ");
         int n = sc.nextInt();
         sc.nextLine();
 
         char[][] seats = new char[m][n];
 
-        System.out.println("Enter " + m + " rows of seat layout (. for good, # for broken):");
+        System.out.println("Enter layout (. or #):");
         for (int i = 0; i < m; i++)
             seats[i] = sc.nextLine().toCharArray();
 
@@ -49,24 +56,28 @@ public class Question15 {
 
             for (int mask = 0; mask < (1 << n); mask++) {
 
-                if (!isValid(mask, 0, seats[i]))
-                    continue;
-
                 int count = Integer.bitCount(mask);
 
                 for (int prev = 0; prev < (1 << n); prev++) {
 
+                    if (dp[prev] == 0 && i != 0) continue;
+
                     if (isValid(mask, prev, seats[i])) {
-                        newDp[mask] = Math.max(newDp[mask],
-                                dp[prev] + count);
+
+                        newDp[mask] = Math.max(
+                                newDp[mask],
+                                dp[prev] + count
+                        );
+
                         max = Math.max(max, newDp[mask]);
                     }
                 }
             }
+
             dp = newDp;
         }
 
-        System.out.println(max);
+        System.out.println("Maximum Students: " + max);
 
         sc.close();
     }
